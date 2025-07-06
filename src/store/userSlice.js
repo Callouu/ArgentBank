@@ -47,11 +47,13 @@ const userSlice = createSlice({
     profile: null,
     loading: false,
     error: null,
+    isAuthenticated: false,
   },
   reducers: {
     logout: (state) => {
       state.token = null
       state.profile = null
+      state.isAuthenticated = false
       localStorage.removeItem('token')
     },
   },
@@ -64,10 +66,12 @@ const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false
         state.token = action.payload
+        state.isAuthenticated = true
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload
+        state.isAuthenticated = false
       })
       .addCase(fetchUserProfile.pending, (state) => {
         state.loading = true
