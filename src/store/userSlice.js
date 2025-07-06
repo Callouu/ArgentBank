@@ -1,19 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { loginRequest, fetchProfileRequest } from './userApi'
 
 // Login
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async ({ email, password }, thunkAPI) => {
     try {
-      const response = await axios.post('http://localhost:3001/api/v1/user/login', {
-        email,
-        password,
-      })
-      localStorage.setItem('token', response.data.body.token)
-      return response.data.body.token
+      const token = await loginRequest({ email, password })
+      localStorage.setItem('token', token)
+      return token
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message)
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message)
     }
   }
 )
@@ -24,18 +21,10 @@ export const fetchUserProfile = createAsyncThunk(
   async (_, thunkAPI) => {
     const token = localStorage.getItem('token')
     try {
-      const response = await axios.post(
-        'http://localhost:3001/api/v1/user/profile',
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      return response.data.body
+      const profile = await fetchProfileRequest(token)
+      return profile
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message)
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message)
     }
   }
 )
