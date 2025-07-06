@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo
+    container_name: argentbank-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  api:
+    build: ./argent-bank-backend
+    container_name: argentbank-api
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/argentbank
+    volumes:
+      - ./argent-bank-backend:/app
+    command: npm run dev
+
+volumes:
+  mongo-data:
