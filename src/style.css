@@ -1,0 +1,109 @@
+html {
+  color: #2c3e50;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.feature-icon {
+  width: 100px;
+  padding: 1rem;
+  border: 10px solid #00bc77;
+  border-radius: 50%;
+}
+.feature-item {
+  -ms-flex: 1;
+  flex: 1;
+  padding: 2.5rem;
+  -webkit-box-flex: 1;
+}
+.feature-item-title {
+  margin-bottom: 0.5rem;
+  color: #222;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0 1.5rem;
+  border-top: 2px solid #ccc;
+}
+.footer-text {
+  margin: 0;
+  padding: 0;
+}
+
+.hero {
+  position: relative;
+  height: 300px;
+  background-image: url("./assets/bank-tree.jpeg");
+  background-position: 0 -50px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (min-width: 920px) {
+  .hero {
+    height: 400px;
+    background-position: 0% 33%;
+  }
+}
+.hero-content {
+  position: relative;
+  top: 2rem;
+  width: 200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: white;
+  text-align: left;
+}
+@media (min-width: 920px) {
+  .hero-content {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 300px;
+    margin: 2rem;
+  }
+}
+.hero-content .subtitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+@media (min-width: 920px) {
+  .hero-content .subtitle {
+    font-size: 1.5rem;
+  }
+}
+.hero-content .text {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+@media (min-width: 920px) {
+  .hero-content .text {
+    font-size: 1.2rem;
+  }
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 920px) {
+  .features {
+    flex-direction: row;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
