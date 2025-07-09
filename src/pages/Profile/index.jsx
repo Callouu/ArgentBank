@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import EditProfile from '../../components/EditProfile'
 
 function Profile() {
   const navigate = useNavigate()
@@ -18,6 +19,7 @@ function Profile() {
 
   return (
     <div>
+      <EditProfile />
       <h1>Profile</h1>
       <p>
         <strong>First Name:{profile?.firstName}</strong> 
@@ -27,6 +29,9 @@ function Profile() {
       </p>
       <p>
         <strong>Email:</strong> {profile?.email}
+      </p>
+      <p>
+        <strong>Total du compte :</strong> {profile?.accountTotal ?? 'Non disponible'} €
       </p>
     </div>
   )

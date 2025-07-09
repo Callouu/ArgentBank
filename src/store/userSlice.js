@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { loginRequest, fetchProfileRequest } from './userApi'
+import { loginRequest, fetchProfileRequest, updateProfileRequest } from './userApi'
 
 // Login
 export const loginUser = createAsyncThunk(
@@ -23,6 +23,20 @@ export const fetchUserProfile = createAsyncThunk(
     try {
       const profile = await fetchProfileRequest(token)
       return profile
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message)
+    }
+  }
+)
+
+// Action asynchrone pour mettre à jour le profil de l'utilisateur
+export const updateUserProfile = createAsyncThunk(
+  'user/updateUserProfile',
+  async ({ firstName, lastName }, thunkAPI) => {
+    const token = localStorage.getItem('token')
+    try {
+      const updatedProfile = await updateProfileRequest(token, { firstName, lastName })
+      return updatedProfile
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data?.message || error.message)
     }
@@ -70,6 +84,18 @@ const userSlice = createSlice({
         state.profile = action.payload
       })
       .addCase(fetchUserProfile.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload
+      })
+      .addCase(updateUserProfile.pending, (state) => {
+        state.loading = true
+        state.error = null
+      })
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        state.loading = false
+        state.profile = action.payload
+      })
+      .addCase(updateUserProfile.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload
       })
