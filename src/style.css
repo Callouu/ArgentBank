@@ -14,6 +14,10 @@ body {
   min-height: 100vh;
 }
 
+.bg-dark {
+  background-color: #12002b;
+}
+
 .feature-icon {
   width: 100px;
   padding: 1rem;
@@ -31,6 +35,38 @@ body {
   color: #222;
   font-size: 1.25rem;
   font-weight: bold;
+}
+
+.main {
+  flex: 1;
+}
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+}
+.main-nav a {
+  color: #2c3e50;
+  font-weight: bold;
+}
+.main-nav a.router-link-exact-active {
+  color: #42b983;
+}
+.main-nav-item {
+  margin-right: 0.5rem;
+  text-decoration: none;
+}
+.main-nav-item:hover {
+  text-decoration: underline;
+}
+.main-nav-logo {
+  display: flex;
+  align-items: center;
+}
+.main-nav-logo-image {
+  width: 200px;
+  max-width: 100%;
 }
 
 .footer {
@@ -104,6 +140,53 @@ body {
   .features {
     flex-direction: row;
   }
+}
+
+.sign-in-button {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 8px;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.sign-in-content {
+  box-sizing: border-box;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  background-color: white;
+}
+.sign-in-icon {
+  font-size: 5rem;
+}
+
+.input-remember {
+  display: flex;
+}
+.input-remember label {
+  margin-left: 0.25rem;
+}
+.input-error {
+  margin-top: 15px;
+  color: red;
+}
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.input-wrapper label {
+  font-weight: bold;
+}
+.input-wrapper input {
+  padding: 5px;
+  font-size: 1.2rem;
 }
 
 /*# sourceMappingURL=style.css.map */
