@@ -8,11 +8,19 @@ export default function Login() {
   let navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [rememberMe, setRememberMe] = useState(false)
   const { loading, error, isAuthenticated } = useSelector((state) => state.user)
 
   useEffect(() => {
+    // Vérifie si un token est stocké en localStorage
+    const remembered = localStorage.getItem('rememberMe')
+    if (remembered === 'true' && localStorage.getItem('token')) {
+      dispatch(fetchUserProfile())
+    }
+  }, [dispatch])
+
+  useEffect(() => {
     console.log('isAuthenticated:', isAuthenticated)
-    // If the user is already authenticated, redirect to the profile page
     if (isAuthenticated) {
       navigate('/profile')
     }
@@ -23,21 +31,56 @@ export default function Login() {
     const resultAction = await dispatch(loginUser({ email, password }))
     if (loginUser.fulfilled.match(resultAction)) {
       dispatch(fetchUserProfile())
+      if (rememberMe) {
+        localStorage.setItem('rememberMe', 'true')
+      } else {
+        localStorage.removeItem('rememberMe')
+      }
     }
   }
 
   if (isAuthenticated) {
-    return null // Optionally, show a loading spinner or nothing while redirecting
+    return null
   }
 
   return (
+    <main className="main bg-dark">
+			<section className="sign-in-content">
+				<i className="fa fa-user-circle sign-in-icon"></i>
+				<h1>Sign In</h1>
     <form onSubmit={handleSubmit}>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button type="submit" disabled={loading}>
+      <div className="input-wrapper">
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+      </div>
+      <div className="input-wrapper">
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      </div>
+      <div className="input-remember">
+      <label>
+        <input
+          type="checkbox"
+          checked={rememberMe}
+          onChange={() => setRememberMe((user) => !user)}
+        />
+        Remember me
+      </label>
+      </div>
+      <button type="submit" className="sign-in-button" disabled={loading}>
         Login
       </button>
       {error && <p>{error}</p>}
     </form>
+    </section>
+		</main>
   )
 }
