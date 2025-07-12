@@ -10,7 +10,7 @@ services:
       - mongo-data:/data/db
 
   api:
-    build: ./argent-bank-backend
+    build: .
     container_name: argentbank-api
     ports:
       - "3001:3001"
@@ -19,8 +19,8 @@ services:
     environment:
       - MONGO_URI=mongodb://mongo:27017/argentbank
     volumes:
-      - ./argent-bank-backend:/app
-    command: npm run dev
+      - .:/app
+    command: npm run dev:server
 
 volumes:
   mongo-data:
