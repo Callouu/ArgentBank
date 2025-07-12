@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { loginUser, fetchUserProfile } from '../../store/userslice'
+import { loginUser, fetchUserProfile, fetchUserTransactions } from '../../store/userslice'
 
 export default function Login() {
   const dispatch = useDispatch()
@@ -9,7 +9,7 @@ export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
-  const { loading, error, isAuthenticated } = useSelector((state) => state.user)
+  const { loading, error, isAuthenticated, profile } = useSelector((state) => state.user)
 
   useEffect(() => {
     // Vérifie si un token est stocké en localStorage
@@ -21,16 +21,16 @@ export default function Login() {
 
   useEffect(() => {
     console.log('isAuthenticated:', isAuthenticated)
-    if (isAuthenticated) {
+    if (isAuthenticated && profile?.id) {
       navigate('/profile')
     }
-  }, [isAuthenticated, navigate])
+  }, [isAuthenticated, profile, navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     const resultAction = await dispatch(loginUser({ email, password }))
     if (loginUser.fulfilled.match(resultAction)) {
-      dispatch(fetchUserProfile())
+      dispatch(fetchUserProfile())   
       if (rememberMe) {
         localStorage.setItem('rememberMe', 'true')
       } else {
