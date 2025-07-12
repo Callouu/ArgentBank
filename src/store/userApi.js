@@ -1,4 +1,5 @@
 import axios from 'axios'
+import transactions from '../data/transactions.json'
 
 export const loginRequest = async ({ email, password }) => {
   const response = await axios.post('http://localhost:3001/api/v1/user/login', {
@@ -32,4 +33,9 @@ export const updateProfileRequest = async (token, { firstName, lastName }) => {
     }
   )
   return response.data.body
+}
+
+export const fetchTransactionsRequest = async (userId) => {
+  // Simule une requête API en filtrant les transactions du fichier JSON
+  return transactions.filter((tx) => tx.userId === userId)
 }
