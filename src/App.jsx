@@ -1,12 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { useDispatch } from 'react-redux'
-import { fetchUserProfile } from './store/userslice'
+import { fetchUserProfile, initializeToken } from './store/userslice'
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+
 
 
 function App() {
