@@ -16,7 +16,7 @@ function Header() {
   return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
-        <img src={Logo} alt="Argent Bank Logo" />
+        <img src={Logo} className="main-nav-logo-image" alt="Argent Bank Logo" />
       </Link>
       <div>
         {isLoggedIn ? (
