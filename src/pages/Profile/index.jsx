@@ -23,38 +23,43 @@ function Profile() {
   }, [isAuthenticated, profile, dispatch, navigate]);
 
   if (!isAuthenticated) {
-    return null; 
+    return null;
   }
 
   const userAccounts = transactions
-    ? transactions.filter((account) => account.userId === profile?.id)
-    .flatMap((userAccount) => userAccount.account || [])
+    ? transactions
+        .filter((account) => account.userId === profile?.id)
+        .flatMap((userAccount) => userAccount.account || [])
     : [];
 
-  console.log("transactions:", transactions);
-  console.log("userAccounts:", userAccounts);
+  // console.log("transactions:", transactions);
+  // console.log("userAccounts:", userAccounts);
   return (
     <main className="main bg-dark">
       <div className="header">
-        <h1>Welcome {profile?.firstName}</h1>
-        <button onClick={() => setShowEdit((v) => !v)}>
-          {showEdit ? "Fermer le formulaire" : "Modifier mon profil"}
-        </button>
+        <h1>
+          Welcome back
+          <br /> {profile?.firstName} {profile?.lastName}!
+        </h1>
+        {!showEdit && (
+          <button
+            className="edit-button"
+            onClick={() => setShowEdit((v) => !v)}
+          >
+            Edit Name
+          </button>
+        )}
         {showEdit && <EditProfile onCancel={() => setShowEdit(false)} />}
-        {/* <EditProfile /> */}
       </div>
-      <h2 className="title">Accounts</h2>
-      <div className="account">
-        {userAccounts
-          // .flatMap((userAccount) => userAccount.account || [])
-          .map((account, index) => (
-            <Card
-              key={account.title || index}
-              title={account.title}
-              amount={account.amount}
-              description={account.description}
-            />
-          ))}
+      <div className="account-list">
+        {userAccounts.map((account, index) => (
+          <Card
+            key={account.title || index}
+            title={account.title}
+            amount={account.amount}
+            description={account.description}
+          />
+        ))}
       </div>
     </main>
   );
