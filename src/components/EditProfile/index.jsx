@@ -2,6 +2,19 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "../../store/userslice";
 
+/**
+ * EditProfile component
+ *
+ * Allows the user to edit their first and last name.
+ * Displays a form with input fields and Save/Cancel buttons.
+ * Handles form submission and error display.
+ *
+ * @category Components
+ * @component
+ * @param {Object} props - Component props
+ * @param {Function} props.onCancel - Callback to close the form without saving
+ * @returns {React.Component} The rendered edit profile form
+ */
 export default function EditProfile({ onCancel }) {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.user.profile);

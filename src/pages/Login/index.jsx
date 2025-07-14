@@ -6,6 +6,19 @@ import {
   fetchUserProfile
 } from "../../store/userslice";
 
+/**
+ * Login component
+ *
+ * Handles user authentication.
+ * - Allows users to enter their email and password.
+ * - Supports "Remember me" functionality to persist login.
+ * - Redirects to the profile page upon successful authentication.
+ * - Displays error messages on failed login attempts.
+ *
+ * @category Pages
+ * @component
+ * @returns { React.Component } A React component
+ */
 export default function Login() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -33,7 +46,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const resultAction = await dispatch(loginUser({ email, password }));
+    const resultAction = await dispatch(loginUser({ email, password, rememberMe }));
     if (loginUser.fulfilled.match(resultAction)) {
       dispatch(fetchUserProfile());
       if (rememberMe) {

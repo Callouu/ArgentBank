@@ -5,7 +5,8 @@ import iconMoney from "../../assets/icon-money.png";
 import iconSecurity from "../../assets/icon-security.png";
 
 /**
- * Render Home Page
+ * Renders the main landing page with hero content and feature highlights.
+ * Displays promotional information and three feature cards for chat support, savings rates, and security.
  *
  * @category Pages
  * @component

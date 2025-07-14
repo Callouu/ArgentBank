@@ -4,6 +4,17 @@ import { Link } from 'react-router'
 import Logo from "../../assets/argentBankLogo.png";
 import { logout } from '../../store/userslice'
 
+/**
+ * Header component
+ *
+ * Renders the main navigation bar with the Argent Bank logo.
+ * Displays user information and navigation links based on authentication status.
+ * Shows "Sign In" when not authenticated, and "Profile" and "Sign Out" when logged in.
+ *
+ * @category Components
+ * @component
+ * @returns {JSX.Element} The rendered header navigation bar
+ */
 function Header() {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user)

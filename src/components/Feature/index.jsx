@@ -1,9 +1,16 @@
+import React from 'react';
 /**
- * Render a div with an image, a title, and a paragraph.
+ * Feature component
+ *
+ * Renders a feature item with an image, a title, and a descriptive paragraph.
  *
  * @category Components
  * @component
- * @returns { React.Component } A React component
+ * @param {Object} props - Component props
+ * @param {string} props.img - The source URL of the feature image
+ * @param {string} props.title - The title of the feature
+ * @param {string} props.text - The description text of the feature
+ * @returns {React.Component} The rendered feature item
  */
 function Feature({ img, title, text }) {
 	return (

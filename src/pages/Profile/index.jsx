@@ -5,6 +5,18 @@ import { fetchUserTransactions } from "../../store/userslice";
 import EditProfile from "../../components/EditProfile";
 import Card from "../../components/Card";
 
+/**
+ * Profile component
+ *
+ * Displays the profile page for the authenticated user.
+ * - Redirects to the login page if the user is not authenticated.
+ * - Fetches and displays the user's bank accounts as cards.
+ * - Allows editing of the user's first and last name via an edit form.
+ *
+ * @category Pages
+ * @component
+ * @returns { React.Component } A React component
+ */
 function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
