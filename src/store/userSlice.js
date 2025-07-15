@@ -9,10 +9,19 @@ import {
 // Login
 export const loginUser = createAsyncThunk(
   "user/loginUser",
-  async ({ email, password }, thunkAPI) => {
+  async ({ email, password, rememberMe }, thunkAPI) => {
     try {
       const token = await loginRequest({ email, password });
-      localStorage.setItem("token", token);
+      // localStorage.setItem("token", token);
+      if (rememberMe) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("rememberMe", "true");
+        sessionStorage.removeItem("token");
+      } else {
+        sessionStorage.setItem("token", token);
+        localStorage.removeItem("token");
+        localStorage.removeItem("rememberMe");
+      }
       return token;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -26,7 +35,9 @@ export const loginUser = createAsyncThunk(
 export const fetchUserProfile = createAsyncThunk(
   "user/fetchUserProfile",
   async (_, thunkAPI) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("rememberMe") === "true"
+      ? localStorage.getItem("token")
+      : sessionStorage.getItem("token");
     try {
       const profile = await fetchProfileRequest(token);
       return profile;
@@ -42,7 +53,9 @@ export const fetchUserProfile = createAsyncThunk(
 export const updateUserProfile = createAsyncThunk(
   "user/updateUserProfile",
   async ({ firstName, lastName }, thunkAPI) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("rememberMe") === "true"
+      ? localStorage.getItem("token")
+      : sessionStorage.getItem("token");
     try {
       const updatedProfile = await updateProfileRequest(token, {
         firstName,
@@ -73,11 +86,21 @@ export const fetchUserTransactions = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    token: localStorage.getItem("token") || null,
+    // token: localStorage.getItem("token") || null,
+    token:
+      localStorage.getItem("rememberMe") === "true"
+        ? localStorage.getItem("token")
+        : sessionStorage.getItem("token"),
     profile: null,
     loading: false,
     error: null,
-    isAuthenticated: !!localStorage.getItem("token"),
+    // isAuthenticated: !!localStorage.getItem("token"),
+    isAuthenticated:
+      !!(
+        (localStorage.getItem("rememberMe") === "true" &&
+          localStorage.getItem("token")) ||
+        sessionStorage.getItem("token")
+      ),
   },
   reducers: {
     logout: (state) => {
@@ -85,9 +108,13 @@ const userSlice = createSlice({
       state.profile = null;
       state.isAuthenticated = false;
       localStorage.removeItem("token");
+      localStorage.removeItem("rememberMe");
+      sessionStorage.removeItem("token");
     },
     initializeToken: (state) => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("rememberMe") === "true"
+        ? localStorage.getItem("token")
+        : sessionStorage.getItem("token");
       state.token = token || null;
       state.isAuthenticated = !!token;
     },
