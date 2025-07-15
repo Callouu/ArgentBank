@@ -5,7 +5,7 @@ info:
   version: '1.0.0'
   termsOfService: 'http://swagger.io/terms/'
 host: localhost:3001
-basePath: /api/v1
+basePath: /api/v2
 schemes:
   - http
 paths:
@@ -119,14 +119,14 @@ paths:
 
 
   
-  /user/transactions/{transactionsAccountID}:
+  /user/transactions/{AccountID}:
     get:
       security:
         - Bearer: []
       tags:
-        - Acount checking transactions
-      summary: User transactions API
-      description: API for account checking Transactions
+        - Transactions Module
+      summary: User account API
+      description: API for checking account
       parameters:
         - in: header
           name: Authorization
@@ -134,7 +134,7 @@ paths:
           type : string
           required: true
           
-        - name: transactionsAccountID
+        - name: AccountID
           in: path
           required: true
           description: Account transactions
@@ -146,21 +146,21 @@ paths:
         '200':
           description: Detail transactions successfully
           schema:
-            $ref: '#/definitions/TransactionsAccount'
+            $ref: '#/definitions/AccountDetail'
         '400':
           description: Invalid Fields
         '500':
           description: Internal Server Error
           
           
-  /user/transactions/{transactionsAccountID}/{transactionID}:
+  /user/transactions/{AccountID}/{transactionID}:
     get:
       security:
         - Bearer: []
       tags:
-        - Acount checking transactions
+        - Transactions Module
       summary: User transaction API
-      description: API for account checking Transaction
+      description: API for checking transaction account
       parameters:
         - in: header
           name: Authorization
@@ -168,7 +168,7 @@ paths:
           type : string
           required: true
           
-        - name: transactionsAccountID
+        - name: AccountID
           in: path
           required: true
           description: Account transactions
@@ -191,12 +191,54 @@ paths:
         '500':
           description: Internal Server Error
   
+    
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: User transaction Informations API
+      description: API for Informations Transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          type : string
+          required: true
+          
+        - name: AccountID
+          in: path
+          required: true
+          description: Account transactions
+          type: integer
+          
+        - name: transactionID
+          in: path
+          required: true
+          description: information created
+          type: integer
+        - name: param
+          in: body
+          schema:
+            $ref: '#/definitions/TransactionInformation'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: information created Successfully
+          schema:
+            $ref: '#/definitions/TransactionMessage'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+          
           
     put:
       security:
         - Bearer: []
       tags:
-        - Acount checking transactions
+        - Transactions Module
       summary: User transaction Informations API
       description: API for Informations Transaction
       parameters:
@@ -206,7 +248,7 @@ paths:
           type : string
           required: true
 
-        - name: transactionsAccountID
+        - name: AccountID
           in: path
           required: true
           description: Account transactions
@@ -239,7 +281,7 @@ paths:
       security:
         - Bearer: []
       tags:
-        - Acount checking transactions
+        - Transactions Module
       summary: User transaction Informations API
       description: API for Informations Transaction
       parameters:
@@ -249,7 +291,7 @@ paths:
           type : string
           required: true
           
-        - name: transactionsAccountID
+        - name: AccountID
           in: path
           required: true
           description: Account transactions
@@ -273,47 +315,6 @@ paths:
         '500':
           description: Internal Server Error   
           
-          
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - Acount checking transactions
-      summary: User transaction Informations API
-      description: API for Informations Transaction
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          type : string
-          required: true
-          
-        - name: transactionsAccountID
-          in: path
-          required: true
-          description: Account transactions
-          type: integer
-          
-        - name: transactionID
-          in: path
-          required: true
-          description: information created
-          type: integer
-        - name: param
-          in: body
-          schema:
-            $ref: '#/definitions/TransactionInformation'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: information created Successfully
-          schema:
-            $ref: '#/definitions/TransactionMessage'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error   
           
           
           
@@ -380,7 +381,7 @@ definitions:
   
         
         
-  TransactionsAccount:
+  AccountDetail:
     type: array
     items:
       type: object
