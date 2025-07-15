@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   loginUser,
   fetchUserProfile
-} from "../../store/userslice";
+} from "../../store/userSlice";
 
 /**
  * Login component
@@ -38,7 +38,7 @@ export default function Login() {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log("isAuthenticated:", isAuthenticated);
+    // console.log("isAuthenticated:", isAuthenticated);
     if (isAuthenticated && profile?.id) {
       navigate("/profile");
     }
