@@ -91,11 +91,19 @@ ArgentBank/
 - Affichage des comptes bancaires
 - (À venir) : gestion des transactions
 
-## Documentation API
+## Documentation technique
+
+### Documentation API
 
 La documentation Swagger est disponible ici :
 
 http://localhost:3001/api-docs
+
+### documentation JSDoc
+
+```bash
+# Ouvrir docs/index.html dans votre navigateur
+```
 
 ## Maquettes & Wireframes
 
