@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserProfile } from "../../store/userslice";
+import { updateUserProfile } from "../../store/userSlice";
 
 /**
  * EditProfile component

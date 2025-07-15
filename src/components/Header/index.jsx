@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router'
 import Logo from "../../assets/argentBankLogo.png";
-import { logout } from '../../store/userslice'
+import { logout } from '../../store/userSlice'
 
 /**
  * Header component
@@ -36,12 +36,6 @@ function Header() {
 						<i className="fa fa-user-circle"></i>
 						{user.profile?.firstName}
 					</Link>
-            {/* <span className="main-nav-item">
-              <i className="fa fa-user-circle"></i> {user.profile?.firstName}
-            </span> */}
-            {/* <button className="main-nav-item" onClick={handleSignOut}>
-              <i className="fa fa-sign-out"></i> Sign Out
-            </button> */}
             <Link onClick={handleSignOut} className="main-nav-item" to="/">
 						<i className="fa fa-sign-out"></i>
 						Sign Out
