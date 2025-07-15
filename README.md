@@ -70,7 +70,7 @@ npm run dev
 ## Structure du projet
 
 ```c#
-Sportsee/
+ArgentBank/
 ├── api/                 # API simulée avec Node.js, Express et Mongo
 ├── src/                 # Code source React
 │   ├── assets/          # images et SVG
