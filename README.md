@@ -4,9 +4,7 @@ ArgentBank est une application bancaire moderne permettant aux utilisateurs de c
 
 ---
 
-## Installation
-
-### Stack Technique 
+## Stack Technique 
 
 Frontend
 
@@ -25,6 +23,8 @@ Backend
 - Swagger
 
 ---
+
+## Installation
 
 ### Prérequis
 
@@ -70,7 +70,7 @@ npm run dev
 ## Structure du projet
 
 ```c#
-Sportsee/
+ArgentBank/
 ├── api/                 # API simulée avec Node.js, Express et Mongo
 ├── src/                 # Code source React
 │   ├── assets/          # images et SVG
