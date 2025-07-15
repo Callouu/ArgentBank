@@ -4,9 +4,7 @@ ArgentBank est une application bancaire moderne permettant aux utilisateurs de c
 
 ---
 
-## Installation
-
-### Stack Technique 
+## Stack Technique 
 
 Frontend
 
@@ -25,6 +23,8 @@ Backend
 - Swagger
 
 ---
+
+## Installation
 
 ### Prérequis
 
