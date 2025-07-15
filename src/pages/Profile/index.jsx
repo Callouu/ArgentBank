@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchUserTransactions } from "../../store/userslice";
+import { fetchUserTransactions } from "../../store/userSlice";
 import EditProfile from "../../components/EditProfile";
 import Card from "../../components/Card";
 
